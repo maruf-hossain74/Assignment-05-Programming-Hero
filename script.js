@@ -31,6 +31,7 @@ const modalTitle = document.getElementById("modalTitle");
 const modalDescription = document.getElementById("modalDescription");
 const modalStatus = document.getElementById("modalStatus");
 const modalAuthor = document.getElementById("modalAuthor");
+const modalAssignee = document.getElementById("modalAssignee");
 const modalPriority = document.getElementById("modalPriority");
 const modalLabel = document.getElementById("modalLabel");
 const modalCreated = document.getElementById("modalCreated");
@@ -94,7 +95,7 @@ function displayIssues(issues) {
         card.innerHTML = `
 <div class="p-5">
     <div class="flex justify-between items-center mb-4">
-        <div class="bg-green-100 p-3 rounded-full text-green-600">
+        <div class=" p-3 rounded-full text-green-600">
             <i class="fa-regular fa-circle-dot"></i>
         </div>
 
@@ -121,11 +122,16 @@ function displayIssues(issues) {
 </div>
 
 <div class="bg-gray-100 px-5 py-3 flex justify-between text-gray-500 text-sm">
-    <div>
-        #${issue.id} by ${issue.author}
+    <!-- Author + Created -->
+    <div class="flex flex-col gap-2">
+        <div>#${issue.id} by ${issue.author}</div>
+        <div>Assignee: ${issue.assignee || "Unassigned"}</div>
     </div>
-    <div>
-        ${new Date(issue.createdAt).toLocaleDateString()}
+
+    <!-- Assignee + Updated -->
+    <div class="flex flex-col text-right gap-2">
+        <div>${new Date(issue.createdAt).toLocaleDateString()}</div>
+        <div>Updated: ${new Date(issue.updatedAt).toLocaleDateString()}</div>
     </div>
 </div>
 `;
@@ -223,7 +229,7 @@ async function loadSingleIssue(id) {
     // Description
     modalDescription.innerText = issue.description;
 
-    // Assignee
+    // author
     modalAuthor.innerText = issue.author;
 
     // Priority
