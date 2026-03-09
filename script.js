@@ -207,16 +207,15 @@ async function loadSingleIssue(id) {
 
     const issue = data.data;
 
-    // Status
+    // Status badge
     modalStatus.innerHTML = `
         <span class="${issue.status === 'open' ? 'bg-green-100 text-green-600' : 'bg-purple-100 text-purple-600'} px-3 py-1 rounded-full text-sm font-semibold">
             ${issue.status.charAt(0).toUpperCase() + issue.status.slice(1)}
         </span>
     `;
 
-    // Title & Date
+    // Title
     modalTitle.innerText = issue.title;
-    modalCreated.innerText = new Date(issue.createdAt).toLocaleDateString();
 
     // Labels
     modalLabel.innerHTML = issue.labels && issue.labels.length > 0 ? 
@@ -229,8 +228,14 @@ async function loadSingleIssue(id) {
     // Description
     modalDescription.innerText = issue.description;
 
-    // author
+    // Author
     modalAuthor.innerText = issue.author;
+
+    // Assignee
+    modalAssignee.innerText = issue.assignee || "Unassigned";
+
+    // Created date
+    modalCreated.innerText = new Date(issue.createdAt).toLocaleDateString();
 
     // Priority
     let priorityColor = '';
@@ -244,6 +249,7 @@ async function loadSingleIssue(id) {
         </span>
     `;
 
+    // Show modal
     modal.classList.remove("hidden");
 }
 
