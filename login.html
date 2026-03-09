@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Issue Tracker Login</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+
+    <!-- Logo -->
+    <div class="flex justify-center mb-4">
+        <img src="./assets/github-logo.png" alt="logo" class="w-14 h-14">
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-2xl font-bold text-center mb-1">
+        GitHub Issues Tracker
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="text-gray-500 text-center mb-6">
+        Sign in to manage your issues
+    </p>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="space-y-4">
+
+        <!-- Username -->
+        <div>
+            <label class="block text-sm font-medium mb-1">
+                Username
+            </label>
+
+            <input
+                id="username"
+                type="text"
+                placeholder="Enter username"
+                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
+            >
+        </div>
+
+
+        <!-- Password -->
+        <div>
+    <label class="block text-sm font-medium mb-1">
+        Password
+    </label>
+
+    <input
+        id="password"
+        type="password"
+        placeholder="Enter password"
+        class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        required
+    >
+</div>
+
+<!-- Remember Me Checkbox -->
+<div class="flex items-center justify-between text-sm mt-2">
+    
+    <label class="flex items-center gap-2 cursor-pointer">
+        <input 
+            type="checkbox" 
+            id="rememberMe"
+            class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+        >
+        Remember Me
+    </label>
+
+</div>
+
+<!-- Sign In Button -->
+<button
+    type="submit"
+    class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition mt-3"
+>
+    Sign In
+</button>
+
+    </form>
+
+    <p class="text-gray-700 pt-5 text-center">OR</p>
+    <!-- Demo Credentials -->
+    <div class="mt-6 text-center text-sm text-gray-600 bg-gray-100 p-3 rounded">
+
+        <p class="font-semibold">Demo Credentials</p>
+
+        <p>Username: <span class="font-mono">admin</span></p>
+
+        <p>Password: <span class="font-mono">admin123</span></p>
+
+    </div>
+
+    <!-- Error Message -->
+    <p id="errorMsg" class="text-red-500 text-center mt-3 hidden">
+        Invalid username or password
+    </p>
+
+</div>
+
+
+
+<script>
+
+const form = document.getElementById("loginForm");
+const errorMsg = document.getElementById("errorMsg");
+
+form.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if(username === "admin" && password === "admin123"){
+
+        localStorage.setItem("loggedIn", "true");
+
+        window.location.href = "index.html";
+
+    } else {
+
+        errorMsg.classList.remove("hidden");
+
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>
